@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="review"
+            type="com.monals.de.gyg.models.Review" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clReview"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:adjustViewBounds="true"
+        android:padding="2dp"
+        android:scaleType="centerCrop">
+
+        <TextView
+            android:id="@+id/twTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text="@{review.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/twId" />
+
+        <TextView
+            android:id="@+id/twId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text="@{review.message}"
+            app:layout_constraintBottom_toTopOf="@+id/twTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
