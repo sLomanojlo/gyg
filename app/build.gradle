@@ -5,9 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    dataBinding {
-        enabled = true
-    }
+
 
     defaultConfig {
         applicationId "com.monals.de.gyg"
@@ -59,6 +57,8 @@ dependencies {
 
     // Retrofit Coroutines Support
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$version_adapter_rxjava2"
+    implementation "com.squareup.okhttp3:logging-interceptor:$version_okhttp3"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
@@ -66,6 +66,19 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
-    //
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //Converter Gson
+    implementation "com.squareup.retrofit2:converter-gson:$version_coverter_gson"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$version_rxjava2"
+    implementation "io.reactivex.rxjava2:rxandroid:$version_rxandroid"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime:$version_paging"
+    
+    //CardView
+    implementation "androidx.cardview:cardview:$version_cardview"
+
+    //Reflect
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
