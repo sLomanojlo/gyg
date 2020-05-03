@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GYG</string>
+    <string name="reviewed_by">Reviewed by \n ${a}</string>
 </resources>

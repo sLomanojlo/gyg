@@ -42,7 +42,7 @@ class ReviewListActivity : AppCompatActivity() {
 
         viewModel.getState().observe(this, Observer { state ->
             progress_bar.visibility = if (viewModel.listIsEmpty() && state == ReviewApiStatus.LOADING) View.VISIBLE else View.GONE
-            txt_error.visibility = if (viewModel.listIsEmpty() && state == ReviewApiStatus.ERROR) View.VISIBLE else View.GONE
+            clError.visibility = if (viewModel.listIsEmpty() && state == ReviewApiStatus.ERROR) View.VISIBLE else View.GONE
             if (!viewModel.listIsEmpty()) {
                 reviewListAdapter.setState(state ?: ReviewApiStatus.DONE)
             }

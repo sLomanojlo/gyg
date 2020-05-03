@@ -17,20 +17,22 @@
         android:orientation="vertical">
 
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent=".66" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clStars"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="4dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/guideline"
             card_view:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_percent=".33" />
 
             <ImageView
                 android:id="@+id/iwStar1"
@@ -38,6 +40,7 @@
                 android:layout_height="20dp"
                 android:scaleType="fitXY"
                 android:tag="1"
+                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/iwStar2"
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -50,6 +53,7 @@
                 android:layout_height="20dp"
                 android:scaleType="fitXY"
                 android:tag="2"
+                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/iwStar3"
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toEndOf="@+id/iwStar1"
@@ -74,6 +78,7 @@
                 android:layout_height="20dp"
                 android:scaleType="fitXY"
                 android:tag="4"
+                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/iwStar5"
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toEndOf="@+id/iwStar3"
@@ -86,7 +91,8 @@
                 android:layout_height="20dp"
                 android:scaleType="fitXY"
                 android:tag="5"
-                card_view:layout_constraintEnd_toEndOf="@id/guideline"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toEndOf="@+id/iwStar4"
                 card_view:layout_constraintTop_toTopOf="parent"
@@ -97,23 +103,24 @@
 
         <TextView
             android:id="@+id/twId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:textSize="16sp"
+            android:textSize="10sp"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/clStars"
             tools:text="Id" />
 
         <TextView
             android:id="@+id/twAuthor"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:padding="12dp"
             android:textSize="16sp"
-            card_view:layout_constraintBottom_toTopOf="@+id/twMessage"
-            card_view:layout_constraintTop_toBottomOf="@+id/twId"
+            card_view:layout_constraintBottom_toBottomOf="@+id/iwProfile"
+            card_view:layout_constraintStart_toEndOf="@+id/iwProfile"
+            card_view:layout_constraintTop_toTopOf="@+id/iwProfile"
             tools:text="Author" />
 
 
@@ -121,11 +128,27 @@
             android:id="@+id/twMessage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:maxLines="2"
             android:padding="12dp"
-            android:maxLines="1"
             android:textSize="16sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="parent"
             tools:text="Message" />
+
+        <ImageView
+            android:id="@+id/iwProfile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:scaleType="fitXY"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_face_black" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
