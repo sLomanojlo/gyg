@@ -1,4 +1,4 @@
-package com.monals.de.gyg.adapters
+package com.monals.de.gyg.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource

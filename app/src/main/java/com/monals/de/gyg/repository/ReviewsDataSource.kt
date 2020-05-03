@@ -1,4 +1,4 @@
-package com.monals.de.gyg.adapters
+package com.monals.de.gyg.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
@@ -11,11 +11,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 
-class ReviewsDataSource(
-    private val reviewApiService: ReviewApiService,
-    private val compositeDisposable: CompositeDisposable) : PageKeyedDataSource<Int, Review>() {
+class ReviewsDataSource(private val reviewApiService: ReviewApiService, private val compositeDisposable: CompositeDisposable)
+    : PageKeyedDataSource<Int, Review>() {
 
-    var state: MutableLiveData<ReviewApiStatus> = MutableLiveData()
+    val state: MutableLiveData<ReviewApiStatus> = MutableLiveData()
     private var retryCompletable: Completable? = null
 
 
@@ -26,11 +25,7 @@ class ReviewsDataSource(
                 .subscribe(
                     { response ->
                         updateState(ReviewApiStatus.DONE)
-                        callback.onResult(response.reviews,
-                            null,
-                            params.requestedLoadSize + 1
-                        )
-                    },
+                        callback.onResult(response.reviews, null, params.requestedLoadSize + 1) },
                     {
                         updateState(ReviewApiStatus.ERROR)
                         setRetry(Action { loadInitial(params, callback) })

@@ -42,7 +42,7 @@
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_star_grey" />
+                tools:src="@drawable/ic_star_black" />
 
             <ImageView
                 android:id="@+id/iwStar2"
