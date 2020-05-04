@@ -10,13 +10,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.monals.de.gyg.R
 import com.monals.de.gyg.models.Review
+import com.monals.de.gyg.util.convertDate
 import com.monals.de.gyg.viewmodel.ReviewApiStatus
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_list_footer.view.*
 import kotlinx.android.synthetic.main.item_review.view.*
 
 private const val DATA_VIEW_TYPE = 1
 private const val FOOTER_VIEW_TYPE = 2
+
+
 
 class ReviewListAdapter(private val retry: () -> Unit) :
     PagedListAdapter<Review, RecyclerView.ViewHolder>(ReviewDiffCallback) {
@@ -37,12 +39,26 @@ class ReviewListAdapter(private val retry: () -> Unit) :
                     .load(review.author.photo)
                     .apply(RequestOptions()
                         .circleCrop()
-                        .placeholder(R.drawable.loading_animation)
+                        .placeholder(R.drawable.loading_img)
                         .error(R.drawable.ic_face_black))
                     .into(itemView.iwProfile)
 
-
+                itemView.twTime.text = convertDate(review.created)
                 setUpImages(itemView, review.rating)
+            }
+        }
+
+        private fun setUpImages(itemView: View, rating: Int) {
+            arrayListOf(
+                itemView.iwStar1,
+                itemView.iwStar2,
+                itemView.iwStar3,
+                itemView.iwStar4,
+                itemView.iwStar5
+            ).forEach{ imgView ->
+                imgView.setImageResource(if (imgView.tag.toString().toInt() <= rating)
+                    R.drawable.ic_star_black else R.drawable.ic_star_border_black
+                )
             }
         }
 
@@ -124,16 +140,3 @@ class ReviewListAdapter(private val retry: () -> Unit) :
 
 }
 
-private fun setUpImages(itemView: View, rating: Int) {
-    arrayListOf(
-        itemView.iwStar1,
-        itemView.iwStar2,
-        itemView.iwStar3,
-        itemView.iwStar4,
-        itemView.iwStar5
-    ).forEach{ imgView ->
-        imgView.setImageResource(if (imgView.tag.toString().toInt() <= rating)
-            R.drawable.ic_star_black else R.drawable.ic_star_border_black
-        )
-    }
-}

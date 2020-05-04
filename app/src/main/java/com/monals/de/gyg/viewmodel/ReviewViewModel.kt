@@ -45,7 +45,7 @@ class ReviewViewModel : ViewModel() {
         reviewDataSourceFactory.reviewDataSourceLiveData.value?.retry()
     }
 
-    fun listIsEmpty(): Boolean {
+    fun isListEmpty(): Boolean {
         return reviewList.value?.isEmpty() ?: true
     }
 

@@ -102,14 +102,25 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/twId"
+            android:id="@+id/twTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:textSize="10sp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/clStars"
+            tools:text="Time" />
+
+        <TextView
+            android:id="@+id/twId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textSize="10sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/twTime"
             tools:text="Id" />
+
 
         <TextView
             android:id="@+id/twAuthor"
