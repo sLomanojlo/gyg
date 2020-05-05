@@ -36,7 +36,7 @@ class ReviewListAdapter(private val retry: () -> Unit) :
 
                 Glide.with(itemView)
 
-                    .load(review.author.photo)
+                    .load(review.author.photo ?: R.drawable.ic_face_black)
                     .apply(RequestOptions()
                         .circleCrop()
                         .placeholder(R.drawable.loading_img)
