@@ -42,6 +42,9 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
 
+    //SafeArgs
+//    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$version_safeargs"
+
     // Core with Ktx
     implementation "androidx.core:core-ktx:$version_core"
 
@@ -59,7 +62,7 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
-    
+
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
@@ -72,7 +75,7 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime:$version_paging"
-    
+
     //CardView
     implementation "androidx.cardview:cardview:$version_cardview"
 
@@ -80,6 +83,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     // mockito
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'org.mockito:mockito-core:2.25.0'
     androidTestImplementation 'org.mockito:mockito-core:2.25.0'
 

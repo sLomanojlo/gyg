@@ -1,6 +1,7 @@
 package com.monals.de.gyg.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
@@ -20,7 +21,7 @@ class ReviewViewModel : ViewModel() {
 
     private val reviewApiService = ReviewApi.retrofitService
 
-    var reviewList: LiveData<PagedList<Review>>
+    val reviewList: LiveData<PagedList<Review>>
 
 
     private val compositeDisposable = CompositeDisposable()

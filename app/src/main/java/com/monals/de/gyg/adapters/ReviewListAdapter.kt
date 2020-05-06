@@ -20,7 +20,7 @@ private const val FOOTER_VIEW_TYPE = 2
 
 
 
-class ReviewListAdapter(private val retry: () -> Unit) :
+class ReviewListAdapter(private val retry: () -> Unit, private val onClickListener: OnClickListenerReview) :
     PagedListAdapter<Review, RecyclerView.ViewHolder>(ReviewDiffCallback) {
 
     private var status = ReviewApiStatus.LOADING
@@ -28,8 +28,7 @@ class ReviewListAdapter(private val retry: () -> Unit) :
     /**ReviewViewHolder*/
     class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(review: Review?) {
-            if (review != null) {
+        fun bind(review: Review) {
                 itemView.twMessage.text = review.message
                 itemView.twAuthor.text = String.format("reviewed by\n${review.author.fullName}")
                 itemView.twId.text = review.id.toString()
@@ -45,7 +44,6 @@ class ReviewListAdapter(private val retry: () -> Unit) :
 
                 itemView.twTime.text = convertDate(review.created)
                 setUpImages(itemView, review.rating)
-            }
         }
 
         private fun setUpImages(itemView: View, rating: Int) {
@@ -73,11 +71,10 @@ class ReviewListAdapter(private val retry: () -> Unit) :
     }
 
 
-
     /**ListFooterViewHolder*/
     class ListFooterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(status: ReviewApiStatus?) {
+        fun bind(status: ReviewApiStatus) {
             itemView.progress_bar.visibility = if (status == ReviewApiStatus.LOADING) View.VISIBLE else View.INVISIBLE
             itemView.iwError.visibility = if (status == ReviewApiStatus.ERROR) View.VISIBLE else View.INVISIBLE
         }
@@ -93,8 +90,6 @@ class ReviewListAdapter(private val retry: () -> Unit) :
     }
 
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == DATA_VIEW_TYPE) ReviewViewHolder.create(parent)
         else ListFooterViewHolder.create(retry, parent)
@@ -103,7 +98,8 @@ class ReviewListAdapter(private val retry: () -> Unit) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE) {
-            (holder as ReviewViewHolder).bind(getItem(position))
+            getItem(position)?.let { (holder as ReviewViewHolder).bind(it) }
+            holder.itemView.setOnClickListener{onClickListener.onClick(getItem(position)!!)}
         } else (holder as ListFooterViewHolder).bind(status)
     }
 
@@ -138,5 +134,10 @@ class ReviewListAdapter(private val retry: () -> Unit) :
         notifyItemChanged(super.getItemCount())
     }
 
-}
+    /**Custom listener that handles clicks on [RecyclerView] items.  Passes the [Review]
+     * associated with the current item to the [onClick] function.*/
+    class OnClickListenerReview(val clickListener: (review: Review) -> Unit) {
+        fun onClick(review: Review) = clickListener(review)
+    }
 
+}
