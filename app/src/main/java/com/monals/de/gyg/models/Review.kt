@@ -10,5 +10,5 @@ data class Review(
     val rating: Int,
     val created: String,
     val language: String,
-    val travelerType: String
+    val travelerType: String?
 )

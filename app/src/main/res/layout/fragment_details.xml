@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,17 +11,199 @@
             type="com.monals.de.gyg.viewmodel.DetailsViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DetailsFragment">
 
-
-    <TextView
-        android:id="@+id/twIds"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:bindId="@{viewModel.selectedReview.id}"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:context=".ui.DetailsFragment">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".66" />
+
+            <TextView
+                android:id="@+id/twAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:textSize="18sp"
+                app:bindString="@{viewModel.selectedReview.author.fullName}"
+                app:layout_constraintStart_toStartOf="@+id/iwProfile"
+                app:layout_constraintTop_toBottomOf="@+id/iwProfile"
+                tools:text="Author" />
+
+            <TextView
+                android:id="@+id/twCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:bindStringNullable="@{viewModel.selectedReview.author.country}"
+                app:layout_constraintStart_toStartOf="@+id/twAuthor"
+                app:layout_constraintTop_toBottomOf="@+id/twAuthor"
+                tools:text="Country" />
+
+
+            <TextView
+                android:id="@+id/twEnjoyment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:bindString="@{viewModel.selectedReview.enjoyment}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twCountry"
+                tools:text="Enjoyment" />
+
+            <TextView
+                android:id="@+id/twMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="16sp"
+                app:bindString="@{viewModel.selectedReview.message}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twEnjoyment"
+                tools:text="Message" />
+
+            <ImageView
+                android:id="@+id/iwProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitXY"
+                app:bindImage="@{viewModel.selectedReview.author.photo}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_face_black" />
+
+            <ImageView
+                android:id="@+id/iwTravelerType"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="fitXY"
+                app:bindTravelerType="@{viewModel.selectedReview.travelerType}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twIds"
+                tools:src="@drawable/ic_young_family" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clStars"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp"
+                app:bindStars="@{viewModel.selectedReview.rating}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iwStar1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:tag="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iwStar2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_star_black" />
+
+                <ImageView
+                    android:id="@+id/iwStar2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:tag="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iwStar3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iwStar1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_star_black" />
+
+                <ImageView
+                    android:id="@+id/iwStar3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_star_black"
+                    android:tag="3"
+                    app:layout_constraintEnd_toStartOf="@+id/iwStar4"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iwStar2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iwStar4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:tag="4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iwStar5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iwStar3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_star_black" />
+
+                <ImageView
+                    android:id="@+id/iwStar5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:tag="5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iwStar4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_star_black" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/twIds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Id"
+                android:textSize="12sp"
+                app:bindId="@{viewModel.selectedReview.id}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/twCreated" />
+
+            <TextView
+                android:id="@+id/twCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Created"
+                android:textSize="12sp"
+                app:bindDate="@{viewModel.selectedReview.created}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clStars" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </layout>
