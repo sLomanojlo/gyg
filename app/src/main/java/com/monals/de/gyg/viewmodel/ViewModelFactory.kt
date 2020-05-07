@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 /** Custom Factory to retrieve or create (only when needed) the correct [ViewModel]*/
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory () :
-    ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory: ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         with(modelClass) {
             when {

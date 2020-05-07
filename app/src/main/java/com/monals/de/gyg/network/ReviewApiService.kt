@@ -1,6 +1,7 @@
 package com.monals.de.gyg.network
 
-import com.monals.de.gyg.BuildConfig
+
+
 import com.monals.de.gyg.models.Act
 import io.reactivex.Single
 import okhttp3.OkHttpClient
@@ -21,8 +22,8 @@ private const val LIMIT = "limit"
 
 val client = OkHttpClient().newBuilder()
     .addInterceptor(HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-        else HttpLoggingInterceptor.Level.NONE })
+        level = HttpLoggingInterceptor.Level.BASIC
+    })
     .build()
 
 

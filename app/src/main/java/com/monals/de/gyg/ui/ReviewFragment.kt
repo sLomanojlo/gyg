@@ -3,12 +3,10 @@ package com.monals.de.gyg.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +15,6 @@ import com.monals.de.gyg.R
 import com.monals.de.gyg.adapters.ReviewListAdapter
 import com.monals.de.gyg.databinding.FragmentReviewListBinding
 import com.monals.de.gyg.models.Review
-import com.monals.de.gyg.viewmodel.DetailsViewModel
 import com.monals.de.gyg.viewmodel.ReviewApiStatus
 import com.monals.de.gyg.viewmodel.ReviewViewModel
 import com.monals.de.gyg.viewmodel.obtainViewModel
@@ -50,11 +47,12 @@ class ReviewFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        /**Setting up the ReviewListAdapter with its [OnClickListener]*/
+        /**Setting up the ReviewListAdapter with its [ReviewListAdapter.OnClickListenerReview]*/
         reviewListAdapter = ReviewListAdapter ( {viewModel.retry()},
             ReviewListAdapter.OnClickListenerReview{
                 savetoSharedPrefs(it)
-                navigateToDetailsFragment(binding)
+                binding.recyclerView.findNavController()
+                    .navigate(R.id.action_reviewListFragment_to_detailsFragment)
             })
 
         binding.recyclerView.adapter = reviewListAdapter
@@ -75,13 +73,12 @@ class ReviewFragment : Fragment() {
     }
 
     private fun navigateToDetailsFragment(binding: FragmentReviewListBinding) {
-        binding.recyclerView.findNavController()
-            .navigate(R.id.action_reviewListFragment_to_detailsFragment)
+
     }
 
     /**Basic utility function for saving data from local storage.*/
     private fun savetoSharedPrefs(review: Review) {
-        sharedPrefs = activity!!.getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
+        sharedPrefs = requireActivity().getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
         val jsonString = GsonBuilder().create().toJson(review)
         sharedPrefs.edit().putString(REVIEW, jsonString).apply()
     }

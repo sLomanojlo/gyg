@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="16dp"
             android:gravity="center"
-            android:text="Connection error! Tap to retry."
+            android:text="@string/connection_error_tap_to_retry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

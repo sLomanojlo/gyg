@@ -1,15 +1,14 @@
 package com.monals.de.gyg.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.monals.de.gyg.repository.ReviewDataSourceFactory
-import com.monals.de.gyg.repository.ReviewsDataSource
 import com.monals.de.gyg.models.Review
 import com.monals.de.gyg.network.ReviewApi
+import com.monals.de.gyg.repository.ReviewDataSourceFactory
+import com.monals.de.gyg.repository.ReviewsDataSource
 import io.reactivex.disposables.CompositeDisposable
 
 /**Enum class in charge of setting the state of the network call.*/

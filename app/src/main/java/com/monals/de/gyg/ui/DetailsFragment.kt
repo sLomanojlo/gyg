@@ -44,7 +44,7 @@ class DetailsFragment : Fragment() {
 
     /**Basic utility function for retrieving data from local storage.*/
     private fun getFromSharedPrefs(value: String): Review {
-        sharedPrefs = activity!!.getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
+        sharedPrefs = requireActivity().getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
         val jsonString = sharedPrefs.getString(value, null)
 
         return GsonBuilder().create().fromJson(jsonString, Review::class.java)

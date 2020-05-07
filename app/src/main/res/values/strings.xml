@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GYG</string>
     <string name="reviewed_by">Reviewed by \n ${a}</string>
+    <string name="id">Id</string>
+    <string name="created">Created</string>
+    <string name="connection_error_tap_to_retry">Connection error! Tap to retry.</string>
 </resources>
