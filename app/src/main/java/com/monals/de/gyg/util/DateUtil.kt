@@ -13,7 +13,7 @@ private const val GYG_TIME_PATTERN = "EEEE, MMMM dd, YYYY"
 private const val ISO_OFFSET_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
  const val INVALID_DATE = "INVALID_DATE"
 
-
+/**Util function for converting dates for different [Build.VERSION].*/
 fun convertDate(created: String): String {
 
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

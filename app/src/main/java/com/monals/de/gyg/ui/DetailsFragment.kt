@@ -21,6 +21,7 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        /** Instantiating or retrieving our [DetailsViewModel]*/
         viewModel = obtainViewModel(DetailsViewModel::class.java)
 
         val binding = FragmentDetailsBinding.inflate(inflater)
@@ -31,13 +32,17 @@ class DetailsFragment : Fragment() {
         /** Giving the binding access to the OverviewViewModel */
         binding.viewModel = viewModel
 
+        /**Fetching the selected review from local storage.*/
         val review: Review = getFromSharedPrefs(REVIEW)
+
+        /**Setting the review in our ViewModel for further potential use.*/
         viewModel.setReview(review)
 
 
         return binding.root
     }
 
+    /**Basic utility function for retrieving data from local storage.*/
     private fun getFromSharedPrefs(value: String): Review {
         sharedPrefs = activity!!.getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
         val jsonString = sharedPrefs.getString(value, null)

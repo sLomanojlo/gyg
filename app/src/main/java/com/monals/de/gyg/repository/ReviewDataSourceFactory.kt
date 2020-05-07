@@ -6,6 +6,7 @@ import com.monals.de.gyg.models.Review
 import com.monals.de.gyg.network.ReviewApiService
 import io.reactivex.disposables.CompositeDisposable
 
+/**ReviewDataSourceFactory in charge of creating a [ReviewsDataSource] */
 class ReviewDataSourceFactory(
     private val compositeDisposable: CompositeDisposable,
     private val reviewApiService: ReviewApiService)
@@ -14,11 +15,11 @@ class ReviewDataSourceFactory(
     val reviewDataSourceLiveData = MutableLiveData<ReviewsDataSource>()
 
     override fun create(): DataSource<Int, Review> {
-        val newsDataSource = ReviewsDataSource(
+        val reviewsDataSource = ReviewsDataSource(
             reviewApiService,
             compositeDisposable
         )
-        reviewDataSourceLiveData.postValue(newsDataSource)
-        return newsDataSource
+        reviewDataSourceLiveData.postValue(reviewsDataSource)
+        return reviewsDataSource
     }
 }

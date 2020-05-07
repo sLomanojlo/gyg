@@ -20,13 +20,13 @@ private const val DATA_VIEW_TYPE = 1
 private const val FOOTER_VIEW_TYPE = 2
 
 
-
+/**RecyclerView adapter for populating the list of reviews.*/
 class ReviewListAdapter(private val retry: () -> Unit, private val onClickListener: OnClickListenerReview) :
     PagedListAdapter<Review, RecyclerView.ViewHolder>(ReviewDiffCallback) {
 
     private var status = ReviewApiStatus.LOADING
 
-    /**ReviewViewHolder*/
+    /**ReviewViewHolder in charge of binding and displaying Review data*/
     class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(review: Review) {
@@ -45,9 +45,6 @@ class ReviewListAdapter(private val retry: () -> Unit, private val onClickListen
                 itemView.twTime.text = convertDate(review.created)
                 setUpRatingImages(itemView, review.rating)
         }
-
-
-
 
         companion object {
             fun create(parent: ViewGroup): ReviewViewHolder {
@@ -77,13 +74,13 @@ class ReviewListAdapter(private val retry: () -> Unit, private val onClickListen
         }
     }
 
-
+    /**In charge of dispatching the right ViewHolder type*/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == DATA_VIEW_TYPE) ReviewViewHolder.create(parent)
         else ListFooterViewHolder.create(retry, parent)
     }
 
-
+    /**Binding ViewHolders. Setting up onClickListener to the ReviewViewHolder.*/
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE) {
             getItem(position)?.let { (holder as ReviewViewHolder).bind(it) }
@@ -96,6 +93,7 @@ class ReviewListAdapter(private val retry: () -> Unit, private val onClickListen
     }
 
 
+    /**DiffUtil in charge of efficiently handling modifications in the list.*/
     companion object {
         val ReviewDiffCallback = object : DiffUtil.ItemCallback<Review>() {
             override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {

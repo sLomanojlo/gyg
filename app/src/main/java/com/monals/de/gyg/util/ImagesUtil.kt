@@ -4,6 +4,7 @@ import android.view.View
 import com.monals.de.gyg.R
 import kotlinx.android.synthetic.main.item_review.view.*
 
+/**Utility function for setting up the rating of Images stars.*/
 fun setUpRatingImages(itemView: View, rating: Int) {
     arrayListOf(
         itemView.iwStar1,

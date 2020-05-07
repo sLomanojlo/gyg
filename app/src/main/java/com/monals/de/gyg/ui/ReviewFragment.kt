@@ -17,6 +17,7 @@ import com.monals.de.gyg.R
 import com.monals.de.gyg.adapters.ReviewListAdapter
 import com.monals.de.gyg.databinding.FragmentReviewListBinding
 import com.monals.de.gyg.models.Review
+import com.monals.de.gyg.viewmodel.DetailsViewModel
 import com.monals.de.gyg.viewmodel.ReviewApiStatus
 import com.monals.de.gyg.viewmodel.ReviewViewModel
 import com.monals.de.gyg.viewmodel.obtainViewModel
@@ -36,6 +37,7 @@ class ReviewFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        /** Instantiating or retrieving our [ReviewViewModel]*/
         viewModel = obtainViewModel(ReviewViewModel::class.java)
 
 
@@ -47,10 +49,14 @@ class ReviewFragment : Fragment() {
         /** Giving the binding access to the OverviewViewModel */
         binding.viewModel = viewModel
 
+
+        /**Setting up the ReviewListAdapter with its [OnClickListener]*/
         reviewListAdapter = ReviewListAdapter ( {viewModel.retry()},
             ReviewListAdapter.OnClickListenerReview{
                 savetoSharedPrefs(it)
-                binding.recyclerView.findNavController().navigate(R.id.action_reviewListFragment_to_detailsFragment)})
+                navigateToDetailsFragment(binding)
+            })
+
         binding.recyclerView.adapter = reviewListAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -68,6 +74,12 @@ class ReviewFragment : Fragment() {
 
     }
 
+    private fun navigateToDetailsFragment(binding: FragmentReviewListBinding) {
+        binding.recyclerView.findNavController()
+            .navigate(R.id.action_reviewListFragment_to_detailsFragment)
+    }
+
+    /**Basic utility function for saving data from local storage.*/
     private fun savetoSharedPrefs(review: Review) {
         sharedPrefs = activity!!.getSharedPreferences(DEFAULT_SHARED_PREFS, Context.MODE_PRIVATE)
         val jsonString = GsonBuilder().create().toJson(review)

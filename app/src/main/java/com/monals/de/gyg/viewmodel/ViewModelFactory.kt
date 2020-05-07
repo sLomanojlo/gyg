@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-/** Custom Factory to retrieve or create (only when needed) the [ViewModel]  */
+/** Custom Factory to retrieve or create (only when needed) the correct [ViewModel]*/
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory () :
     ViewModelProvider.NewInstanceFactory() {

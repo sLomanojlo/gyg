@@ -11,13 +11,14 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 
+/**Class in charge of smoothly fethching data from the server. Returns a [PageKeyedDataSource]*/
 class ReviewsDataSource(private val reviewApiService: ReviewApiService, private val compositeDisposable: CompositeDisposable)
     : PageKeyedDataSource<Int, Review>() {
 
     val state: MutableLiveData<ReviewApiStatus> = MutableLiveData()
     private var retryCompletable: Completable? = null
 
-
+    /**Callback that loads the initial chunk of data.*/
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Review>) {
         updateState(ReviewApiStatus.LOADING)
         compositeDisposable.add(
@@ -33,7 +34,8 @@ class ReviewsDataSource(private val reviewApiService: ReviewApiService, private 
                 )
         )
     }
-
+    /**Callback that loads every next chunk of data when the user reaches a certain position
+     * in the RecyclerView.*/
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Review>) {
         updateState(ReviewApiStatus.LOADING)
         compositeDisposable.add(
@@ -52,7 +54,8 @@ class ReviewsDataSource(private val reviewApiService: ReviewApiService, private 
                 )
         )
     }
-
+    /**Load before should have been used if the loading started somewhere from the middle of the list.
+     *In our case we're loading from the begining, therefore it's empty. */
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Review>) {
     }
 

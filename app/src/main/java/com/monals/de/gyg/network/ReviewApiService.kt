@@ -12,12 +12,17 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://travelers-api.getyourguide.com"
-//get /activities/23776/reviews
+private const val ACTIVITIES = "activities"
+private const val TEMPELHOF = "23376"
+private const val REVIEWS = "reviews"
+private const val OFFSET = "offset"
+private const val LIMIT = "limit"
+
 
 val client = OkHttpClient().newBuilder()
     .addInterceptor(HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-    })
+        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+        else HttpLoggingInterceptor.Level.NONE })
     .build()
 
 
@@ -28,17 +33,15 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-
+/**Queries towards the GYG server returning [Single] of [Act]*/
 interface ReviewApiService {
-    @GET("/activities/23776/reviews")
-    fun getReviews(@Query("offset") offset : Int,
-                   @Query ("limit" ) limit :Int) :
+    @GET("/$ACTIVITIES/$TEMPELHOF/$REVIEWS")
+    fun getReviews(@Query(OFFSET) offset : Int,
+                   @Query (LIMIT ) limit :Int) :
             Single<Act>
 }
 
-/**
- * A public Api object that exposes the lazy-initialized Retrofit service
- */
+/**A public Api object that exposes the lazy-initialized Retrofit service.*/
 object ReviewApi {
     val retrofitService : ReviewApiService by lazy { retrofit.create(ReviewApiService::class.java) }
 }
